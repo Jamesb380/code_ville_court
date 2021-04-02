@@ -3,47 +3,107 @@
 
 import pandas as pd
 import streamlit as st
-import numpy as np
-import glob
-from PIL import Image
 import plotly.express as px
-from matplotlib import pyplot as plt
 import json
-from datetime import datetime
 import streamlit_theme as stt
+from pyspark.sql import SparkSession
+import urllib
 
-
+########################## SETTINGS ###################################
 st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 st.title('A view of court data in Virginia ')
 stt.set_theme({'primary': '#1b3388'})
-#st.title('Court Data Analysis in Virginia')
-#image = Image.open('C:\\Users\\james Bennett\\Desktop\\Code_for_cville\\image\\freedom2.jpg')
-#image2 = Image.open('C:\\Users\\james Bennett\\Desktop\\Code_for_cville\\image\\behind_bars_xsmall.jpg')
-#image3 = Image.open('C:\\Users\\james Bennett\\Desktop\\Code_for_cville\\image\\3652284.jpg')
+
+
+###CENSUS DATA URLS ####
 json_url = 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json'
 pop_url = "https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/asrh/cc-est2019-alldata.csv"
 
 
-# x1, x2, x3 = st.beta_columns((1, 1, 1))
+#####CIRCUIT CASES URLS LIST
+civ_cir_urls = [
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2014_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2015_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2016_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2017_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2018_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2019_anon_00.csv']
+cri_cir_urls = [
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2014_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2015_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2016_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2017_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2018_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2019_anon_00.csv',
+]
+#####DISTRICT CASES URLS LIST
+civ_dist_urls = [
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2014_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2014_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2014_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2015_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2015_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2015_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2016_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2016_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2016_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2017_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2017_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2017_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2018_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2018_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2018_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2019_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2019_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2019_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2019_anon_03.csv',
+]
+cri_dist_urls = [
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_03.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_04.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_05.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_06.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_07.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_03.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_04.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_05.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_06.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_07.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_03.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_04.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_05.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_06.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_07.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_03.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_04.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_05.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_06.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_07.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_00.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_01.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_02.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_03.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_04.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_05.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_06.csv',
+'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_07.csv',
 
-# with x1:
-#   st.image(image3)
-# with x2:
-#  st.image(image2)
-# with x3:
-#   st.image(image)
+]
 
-
-@st.cache(persist=True)
-def load_data(folder):
-    # Update path to location of the data
-    path = 'C:\\Users\\james Bennett\\Desktop\\Code_for_cville\\' + folder
-    # Use glob to identify all text files in path
-    data_files = glob.glob(path + "/*.csv")
-    # Read in each file as csv into Data Frames using pandas
-    frame_list = []
-    if folder == 'data_circuit':
-        columns = ['HearingDate', 'HearingResult', 'HearingJury', 'HearingPlea', 'HearingType',
+#####List of Columns
+civ_cir_cols = ['HearingDate', 'HearingResult', 'HearingJury', 'HearingPlea', 'HearingType',
                    'fips', 'Filed', 'Locality', 'Sex', 'Race',
                    'Charge', 'ChargeType', 'Class', 'OffenseDate', 'ArrestDate',
                    'DispositionCode', 'ConcludedBy', 'AmendedCharge', 'AmendedChargeType',
@@ -51,8 +111,17 @@ def load_data(folder):
                    'OperatorLicenseSuspensionTime', 'FineAmount', 'Costs', 'FinesCostPaid',
                    'ProbationType', 'ProbationTime', 'ProbationStarts', 'CourtDMVSurrender', 'DriverImprovementClinic',
                    'RestitutionAmount', 'TrafficFatality', 'AppealedDate', 'person_id']
-    elif folder == 'data_district':
-        columns = ['HearingDate', 'HearingResult', 'HearingPlea', 'HearingType',
+
+cri_cir_cols = ['HearingDate', 'HearingResult', 'HearingJury', 'HearingPlea', 'HearingType',
+                   'fips', 'Filed', 'Locality', 'Sex', 'Race',
+                   'Charge', 'ChargeType', 'Class', 'OffenseDate', 'ArrestDate',
+                   'DispositionCode', 'ConcludedBy', 'AmendedCharge', 'AmendedChargeType',
+                   'ConcurrentConsecutive', 'LifeDeath', 'SentenceTime', 'SentenceSuspended',
+                   'OperatorLicenseSuspensionTime', 'FineAmount', 'Costs', 'FinesCostPaid',
+                   'ProbationType', 'ProbationTime', 'ProbationStarts', 'CourtDMVSurrender', 'DriverImprovementClinic',
+                   'RestitutionAmount', 'TrafficFatality', 'AppealedDate', 'person_id']
+
+civ_dist_cols = ['HearingDate', 'HearingResult', 'HearingPlea', 'HearingType',
                    'fips', 'FiledDate', 'Locality', 'Name', 'Status',
                    'DefenseAttorney', 'Address', 'AKA1', 'AKA2', 'Gender', 'Race', 'DOB', 'Charge', 'CodeSection',
                    'CaseType', 'Class', 'OffenseDate', 'ArrestDate', 'Complainant', 'AmendedCharge', 'AmendedCode',
@@ -60,33 +129,66 @@ def load_data(folder):
                    'ProbationTime', 'ProbationStarts',
                    'OperatorLicenseRestrictionCodes', 'Fine', 'Costs', 'FineCostsDue',
                    'FineCostsPaid', 'FineCostsPaidDate', 'VASAP', 'FineCostsPastDue', 'person_id']
-    for data_file in data_files:
-        df = pd.read_csv(data_file, usecols=columns)
+
+cri_dist_cols = ['HearingDate', 'HearingResult', 'HearingPlea', 'HearingType',
+                   'fips', 'FiledDate', 'Locality', 'Name', 'Status',
+                   'DefenseAttorney', 'Address', 'AKA1', 'AKA2', 'Gender', 'Race', 'DOB', 'Charge', 'CodeSection',
+                   'CaseType', 'Class', 'OffenseDate', 'ArrestDate', 'Complainant', 'AmendedCharge', 'AmendedCode',
+                   'AmendedCaseType', 'FinalDisposition', 'SentenceTime', 'SentenceSuspendedTime', 'ProbationType',
+                   'ProbationTime', 'ProbationStarts',
+                   'OperatorLicenseRestrictionCodes', 'Fine', 'Costs', 'FineCostsDue',
+                   'FineCostsPaid', 'FineCostsPaidDate', 'VASAP', 'FineCostsPastDue', 'person_id']
+
+@st.cache(persist=True)
+def load_data(folder):
+    frame_list = []
+
+    if folder == 'data_civil_circuit':
+        columns = civ_cir_cols
+        urls = civ_cir_urls
+    elif folder =='data_criminal_circuit':
+        columns = cri_cir_cols
+        urls = cri_cir_urls
+    elif folder == 'data_civil_district':
+        columns = civ_dist_cols
+        urls = civ_dist_urls
+    elif folder == 'data_criminal_district':
+        columns = cri_dist_cols
+        urls = cri_dist_urls
+
+
+    for url in urls:
+        df = pd.read_csv(url, sep=",")
         frame_list.append(df)
 
     df = pd.concat(frame_list, ignore_index=True)
     df.fips = "51" + df.fips.astype(str).str.zfill(3)
-    ###clean some data
 
-    if folder == 'data_circuit':
-        df.Race.replace(['White Caucasian (Non-Hispanic)', 'Black (Non-Hispanic)', 'American Indian'],
-                        ['White', 'Black', 'American Indian Or Alaskan Native'], inplace=True)
-    elif folder == 'data_district':
-        df.Race.replace(['White Caucasian(Non-Hispanic)', 'Black(Non-Hispanic)', 'Unknown (Includes Not Applicable, Unknown)',
-                         'Unknown', 'American Indian or Alaskan Native', 'Asian or Pacific Islander', 'American Indian'],
-                        ['White', 'Black', 'Other(Includes Not Applicable, Unknown)', 'Other(Includes Not Applicable, Unknown)',
-                         'American Indian Or Alaskan Native', 'Asian Or Pacific Islander', 'American Indian Or Alaskan Native'], inplace=True)
+    ###CLEAN SOME DATA
+    if folder == 'data_civil_circuit' or folder == 'data_criminal_circuit':
+        df.Race.replace(['White Caucasian (Non-Hispanic)', 'Black (Non-Hispanic)', 'American Indian', 'Unknown'],
+                        ['White', 'Black', 'American Indian Or Alaskan Native',
+                         'Other (Includes Not Applicable, Unknown)'], inplace=True)
+    elif folder == 'data_civil_district' or folder == 'data_criminal_district':
+        df.Race.replace(['White Caucasian(Non-Hispanic)', 'Black(Non-Hispanic)',
+                         'Unknown (Includes Not Applicable, Unknown)', 'Unknown',
+                         'American Indian or Alaskan Native',
+                         'Asian or Pacific Islander', 'American Indian'],
+                        ['White', 'Black',
+                         'Other(Includes Not Applicable, Unknown)', 'Other(Includes Not Applicable, Unknown)',
+                         'American Indian Or Alaskan Native', 'Asian Or Pacific Islander',
+                         'American Indian Or Alaskan Native'],
+                          inplace=True)
     df.SentenceTime = df['SentenceTime'].fillna(0)
-
+    ############################################################################################################
     return df
-
 
 def map_data(df, va_census, option):
 
-    if option == 'Circuit':
+    if option == 'Circuit Civil' or option == 'Circuit Criminal':
         charge = st.sidebar.selectbox("Select the charge type", df.ChargeType.unique())
         df = df.loc[df.ChargeType == charge]
-    elif option == "District":
+    elif option == "District Civil" or option == 'District Criminal':
         charge = st.sidebar.selectbox("Select the Case type", df.CaseType.unique())
         df = df.loc[df.CaseType == charge]
 
@@ -104,7 +206,7 @@ def map_data(df, va_census, option):
     b_fips_counts.columns = ['fips', 'counts']
 
     # fips_counts["counts_per_100k"] = fips_counts.apply(lambda row: row.counts / (county_pop[row.fips] / 100000), axis=1)
-    import urllib
+
     response = urllib.request.urlopen(json_url)
     counties = json.loads(response.read())
 
@@ -185,11 +287,8 @@ def map_data(df, va_census, option):
     df_tabla.rename(columns={'person_id': 'Count_per'}, inplace= True)
     st.table(df_tabla)
 
-
 def main():
-    cir_df = load_data('data_circuit')
-    dist_df = load_data('data_district')
-    # st.write(cir_df[['OffenseDate', 'ArrestDate', 'HearingDate','HearingResult']].head(10))
+
     #####Cencus Data#####
     va_census = pd.read_csv(pop_url, encoding="latin-1", dtype={"COUNTY": str, "STATE": str})
     va_census = va_census[va_census["STATE"] == 51]
@@ -198,24 +297,34 @@ def main():
     va_census['fips'] = va_census.STATE + va_census.COUNTY
     ################################################
 
-    menu = ["Home", "District", "Circuit", "About"]
+    menu = ["Home", "Circuit Criminal", "District Criminal", "About"]
     st.sidebar.subheader("Select Option")
     choice = st.sidebar.selectbox("Court", menu)
 
     if choice == 'Home':
         st.subheader('Home')
-    elif choice == 'District':
-        map_data(dist_df, va_census,choice)
+    elif choice == 'Circuit Civil':
+        civ_cir_df = load_data('data_civil_circuit')
+       # map_data(civ_cir_df, va_census, choice)
         st.write("""***""")
-    elif choice == 'Circuit':
-        map_data(cir_df, va_census, choice)
+    elif choice == 'Circuit Criminal':
+        cri_cir_df = load_data('data_criminal_circuit')
+        map_data(cri_cir_df, va_census, choice)
+        st.write("""***""")
+    elif choice == 'District Civil':
+        civ_dist_df = load_data('data_civil_district')
+      #  map_data(civ_dist_df, va_census,choice)
+        st.write("""***""")
+    elif choice == 'District Criminal':
+        cri_dist_df = load_data('data_criminal_district')
+        map_data(cri_dist_df, va_census,choice)
         st.write("""***""")
 
     elif choice == 'About':
         st.subheader(choice)
+        st.write('This Page is under Construction')
     else:
         st.error('Something is wrong')
-
 
 if __name__ == '__main__':
     main()
