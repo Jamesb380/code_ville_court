@@ -6,7 +6,6 @@ import streamlit as st
 import plotly.express as px
 import json
 import streamlit_theme as stt
-from pyspark.sql import SparkSession
 import urllib
 
 ########################## SETTINGS ###################################

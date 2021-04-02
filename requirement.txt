@@ -1,3 +1,9 @@
 
-py -m pip install plotly.express           # latest version
-py -m pip install urllib
+pandas==1.2.3
+streamlit==0.79.0
+plotly-express==0.4.1
+jsonschema==3.2.0
+streamlit-theme==0.58.0
+
+
+
