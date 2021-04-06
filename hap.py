@@ -21,35 +21,35 @@ pop_url = "https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/co
 
 #####CIRCUIT CASES URLS LIST
 civ_cir_urls = [
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2014_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2014_anon_00.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2015_anon_00.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2016_anon_00.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2017_anon_00.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2018_anon_00.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2019_anon_00.csv']
 cri_cir_urls = [
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2014_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2015_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2016_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2017_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2014_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2015_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2016_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2017_anon_00.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2018_anon_00.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_criminal_2019_anon_00.csv',
 ]
 #####DISTRICT CASES URLS LIST
 civ_dist_urls = [
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2014_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2014_anon_01.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2014_anon_02.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2015_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2015_anon_01.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2015_anon_02.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2016_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2016_anon_01.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2016_anon_02.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2017_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2017_anon_01.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2017_anon_02.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2018_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2014_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2014_anon_01.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2014_anon_02.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2015_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2015_anon_01.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2015_anon_02.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2016_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2016_anon_01.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2016_anon_02.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2017_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2017_anon_01.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2017_anon_02.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2018_anon_00.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2018_anon_01.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2018_anon_02.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2019_anon_00.csv',
@@ -58,41 +58,41 @@ civ_dist_urls = [
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_civil_2019_anon_03.csv',
 ]
 cri_dist_urls = [
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_01.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_02.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_03.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_04.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_05.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_06.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_07.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_01.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_02.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_03.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_04.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_05.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_06.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_07.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_01.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_02.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_03.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_04.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_05.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_06.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_07.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_01.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_02.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_03.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_04.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_05.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_06.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_07.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_00.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_01.csv',
-'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_02.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_01.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_02.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_03.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_04.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_05.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_06.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2015_anon_07.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_01.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_02.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_03.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_04.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_05.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_06.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2016_anon_07.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_01.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_02.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_03.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_04.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_05.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_06.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2017_anon_07.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_01.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_02.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_03.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_04.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_05.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_06.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2018_anon_07.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_00.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_01.csv',
+#'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_02.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_03.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_04.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fdistrict_criminal_2019_anon_05.csv',
@@ -157,7 +157,8 @@ def load_data(folder):
 
 
     for url in urls:
-        df = pd.read_csv(url, sep=",")
+        df1 = pd.read_csv(url, sep=",")
+        df = df1[:]
         frame_list.append(df)
 
     df = pd.concat(frame_list, ignore_index=True)
@@ -304,7 +305,7 @@ def main():
         st.subheader('Home')
     elif choice == 'Circuit Civil':
         civ_cir_df = load_data('data_civil_circuit')
-       # map_data(civ_cir_df, va_census, choice)
+        map_data(civ_cir_df, va_census, choice)
         st.write("""***""")
     elif choice == 'Circuit Criminal':
         cri_cir_df = load_data('data_criminal_circuit')
@@ -312,7 +313,7 @@ def main():
         st.write("""***""")
     elif choice == 'District Civil':
         civ_dist_df = load_data('data_civil_district')
-      #  map_data(civ_dist_df, va_census,choice)
+        map_data(civ_dist_df, va_census,choice)
         st.write("""***""")
     elif choice == 'District Criminal':
         cri_dist_df = load_data('data_criminal_district')
