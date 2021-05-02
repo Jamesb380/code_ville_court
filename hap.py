@@ -20,7 +20,7 @@ json_url = 'https://raw.githubusercontent.com/plotly/datasets/master/geojson-cou
 pop_url = "https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/asrh/cc-est2019-alldata.csv"
 
 
-#####CIRCUIT CASES URLS LIST
+####CIRCUIT CASES URLS LIST
 civ_cir_urls = [
 #'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2014_anon_00.csv',
 'https://objectstorage.us-ashburn-1.oraclecloud.com/n/idbllzgo8pgz/b/virginia-court-data-code4cville/o/courtdata%2Fcircuit_civil_2015_anon_00.csv',
